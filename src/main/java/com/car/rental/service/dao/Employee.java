@@ -18,7 +18,7 @@ public class Employee {
     private String email;
 
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "branch")
     private Branch branch;
 
