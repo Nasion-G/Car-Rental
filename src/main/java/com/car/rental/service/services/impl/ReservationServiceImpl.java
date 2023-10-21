@@ -38,7 +38,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Reservation> getAll() {
+    public List<Reservation> findAll() {
         return reservationRepo.findAll();
     }
 

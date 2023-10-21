@@ -11,7 +11,7 @@ public interface RefundService {
 
     Refund findById(Long id);
 
-    List<Refund> getAll();
+    List<Refund> findAll();
 
     String delete(Long id);
 }
