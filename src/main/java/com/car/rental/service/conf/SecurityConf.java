@@ -1,5 +1,7 @@
 package com.car.rental.service.conf;
 
+import com.car.rental.service.dao.Role;
+import com.car.rental.service.repositories.RoleRepository;
 import com.car.rental.service.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -18,18 +20,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 public class SecurityConf {
 
-
     @Configuration
     public class SecurityConfig implements CommandLineRunner, WebMvcConfigurer {
         private final UserDetailsServiceImpl userDetailsServiceImpl;
         private final RoleRepository roleRepository;
 
-        @Value(value="${frontendUrl}")
-        private     static String allowedUrl;
+        @Value(value = "${frontendUrl}")
+        private static String allowedUrl;
 
-        public SecurityConfig(UserDetailsServiceImpl userDetailsService, RoleRepository roleRepository){
+        public SecurityConfig(UserDetailsServiceImpl userDetailsService, RoleRepository roleRepository) {
             this.userDetailsServiceImpl = userDetailsService;
-            this.roleRepository=roleRepository;
+            this.roleRepository = roleRepository;
         }
 
         @Override
@@ -43,28 +44,33 @@ public class SecurityConf {
 
         @Override
         public void run(String... args) throws Exception {
-            if(!roleRepository.existsById("ROLE_ADMIN")){
-                Role role=new Role();
+            if (!roleRepository.existsById("ROLE_ADMIN")) {
+                Role role = new Role();
                 role.setRoleId("ROLE_ADMIN");
                 roleRepository.save(role);
             }
-            if(!roleRepository.existsById("ROLE_USER")){
-                Role role=new Role();
+            if (!roleRepository.existsById("ROLE_USER")) {
+                Role role = new Role();
                 role.setRoleId("ROLE_USER");
                 roleRepository.save(role);
             }
         }
+
         @Bean
-        public BCryptPasswordEncoder passwordEncoder(){
+        public BCryptPasswordEncoder passwordEncoder() {
             return new BCryptPasswordEncoder();
         }
+
         @Bean
-        public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)throws Exception{
+        public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+                throws Exception {
             return authenticationConfiguration.getAuthenticationManager();
         }
+
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-            AuthenticationManagerBuilder configuration = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
+            AuthenticationManagerBuilder configuration = httpSecurity
+                    .getSharedObject(AuthenticationManagerBuilder.class);
             configuration.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder());
             AuthenticationManager authenticationManager = configuration.build();
             httpSecurity.authenticationManager(authenticationManager)
