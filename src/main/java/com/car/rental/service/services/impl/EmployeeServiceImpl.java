@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
-    private EmployeeRespository employeeRespository;
+    private final EmployeeRespository employeeRespository;
 
     @Override
     public Employee create(Employee employee) {

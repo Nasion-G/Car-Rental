@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class CarServiceImpl implements CarService {
-    private CarRespository carRespository;
+    private final CarRespository carRespository;
 
     @Override
     public Car create(Car car) {
