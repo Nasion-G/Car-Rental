@@ -1,5 +1,4 @@
 package com.car.rental.service.dao;
-import com.car.rental.service.static_data.Role;
 import jakarta.persistence.*;
 import lombok.*;
 @Entity
