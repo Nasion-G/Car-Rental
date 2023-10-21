@@ -1,5 +1,9 @@
 package com.car.rental.service.repositories;
 
-public class BranchRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.car.rental.service.dao.Branch;
+
+public interface BranchRepo extends JpaRepository<Branch, Long> {
 
 }

@@ -11,7 +11,7 @@ public interface BranchService {
 
     Branch findById(Long id);
 
-    List<Branch> getAll();
+    List<Branch> findAll();
 
     String delete(Long id);
 }

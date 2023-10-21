@@ -11,7 +11,7 @@ public interface ReservationService {
 
     Reservation findById(Long id);
 
-    List<Reservation> getAll();
+    List<Reservation> findAll();
 
     String delete(Long id);
 }

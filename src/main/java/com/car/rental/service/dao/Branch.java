@@ -16,9 +16,14 @@ public class Branch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long branchId;
 
-    @OneToMany(mappedBy = "employee_branch")
+    private String name;
+
+    @OneToMany(mappedBy = "branch")
     private List<Employee> employees;
 
-    @OneToMany(mappedBy = "car_branch")
+    @OneToMany(mappedBy = "branch")
     private List<Car> cars;
+
+    @OneToMany(mappedBy = "branch")
+    private List<Reservation> reservations;
 }
