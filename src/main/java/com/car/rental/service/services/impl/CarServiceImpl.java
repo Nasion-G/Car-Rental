@@ -1,7 +1,6 @@
 package com.car.rental.service.services.impl;
 
 import com.car.rental.service.dao.Car;
-import com.car.rental.service.dao.Refund;
 import com.car.rental.service.exceptions.GenericExceptions;
 import com.car.rental.service.repositories.CarRespository;
 import com.car.rental.service.services.CarService;
@@ -17,10 +16,11 @@ import java.util.Optional;
 @Transactional
 public class CarServiceImpl implements CarService {
     private CarRespository carRespository;
+
     @Override
     public Car create(Car car) {
-     carRespository.save(car);
-     return car;
+        carRespository.save(car);
+        return car;
     }
 
     @Override

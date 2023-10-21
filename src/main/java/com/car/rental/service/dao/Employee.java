@@ -1,6 +1,8 @@
 package com.car.rental.service.dao;
+
 import jakarta.persistence.*;
 import lombok.*;
+
 @Entity
 @Data
 @Builder
@@ -23,7 +25,8 @@ public class Employee {
     @JoinColumn(name = "branch")
     private Branch branch;
 
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "role")
     private Role role;
 
-    }
+}

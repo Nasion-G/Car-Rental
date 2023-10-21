@@ -1,7 +1,6 @@
 package com.car.rental.service.security;
 
 import com.car.rental.service.dao.Employee;
-import com.car.rental.service.dao.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +14,7 @@ public class UserDetailsImpl implements UserDetails {
     private Boolean active;
     private List<GrantedAuthority> roles;
 
-    public UserDetailsImpl(Employee  employee) {
+    public UserDetailsImpl(Employee employee) {
         this.username = employee.getUsername();
         this.password = employee.getPassword();
         this.active = employee.getActive();
