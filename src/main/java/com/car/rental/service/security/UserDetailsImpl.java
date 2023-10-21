@@ -2,8 +2,6 @@ package com.car.rental.service.security;
 
 import com.car.rental.service.dao.Employee;
 
-import com.car.rental.service.dao.Employee;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

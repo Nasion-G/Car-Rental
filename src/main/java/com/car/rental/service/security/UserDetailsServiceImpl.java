@@ -2,9 +2,7 @@ package com.car.rental.service.security;
 
 import com.car.rental.service.dao.Employee;
 import com.car.rental.service.repositories.EmployeeRespository;
-import com.car.rental.service.dao.Employee;
 import com.car.rental.service.exceptions.GenericExceptions;
-import com.car.rental.service.repositories.EmployeeRespository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
