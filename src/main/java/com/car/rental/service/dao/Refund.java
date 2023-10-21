@@ -1,6 +1,7 @@
-package com.car.rental.service.entities;
+package com.car.rental.service.dao;
 
 import java.time.LocalDate;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,20 +11,22 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Loan {
+public class Refund {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long loanId;
+    private Long refundId;
 
     @ManyToOne
-    @JoinColumn(name = "employee")
+    @JoinColumn(name = "employee_refund")
     private Employee employee;
 
-    private LocalDate loanDate;
+    private LocalDate dateOfReturn;
 
     @OneToOne
-    @JoinColumn(name = "loan")
+    @JoinColumn(name = "refund")
     private Reservation reservation;
+
+    private Integer surcharge;
 
     private String comments;
 }

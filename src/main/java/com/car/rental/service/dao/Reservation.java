@@ -1,4 +1,4 @@
-package com.car.rental.service.entities;
+package com.car.rental.service.dao;
 
 import java.time.LocalDate;
 import jakarta.persistence.*;
@@ -26,9 +26,6 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "branch")
     private Branch branchOfLoan;
-
-    @OneToOne(mappedBy = "loan")
-    private Loan loan;
 
     @OneToOne(mappedBy = "refund")
     private Refund refund;
