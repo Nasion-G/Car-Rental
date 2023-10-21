@@ -1,10 +1,8 @@
-package com.sda.springsecuritydemo.security;
+package com.car.rental.service.security;
 
 import com.car.rental.service.dao.Employee;
+import com.car.rental.service.exceptions.GenericExceptions;
 import com.car.rental.service.repositories.EmployeeRespository;
-import com.sda.springsecuritydemo.dao.UserEntity;
-import com.sda.springsecuritydemo.exceptions.GenericExceptions;
-import com.sda.springsecuritydemo.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,10 +21,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Employee> employee = employeeRespository.findByUsername(username);
-        if (employee.isPresent()){
+        if (employee.isPresent()) {
             return new UserDetailsImpl(employee.get());
         } else {
-         throw GenericExceptions.userNotFoundException("username", username);
+            throw GenericExceptions.userNotFoundException("username", username);
         }
     }
 }
