@@ -24,7 +24,7 @@ public class Refund {
 
     @OneToOne
     @JoinColumn(name = "refund")
-    private Reservation reservation;
+    private Reservation refund;
 
     private Integer surcharge;
 

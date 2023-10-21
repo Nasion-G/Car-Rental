@@ -25,7 +25,7 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "branch")
-    private Branch branchOfLoan;
+    private Branch branch;
 
     @OneToOne(mappedBy = "refund")
     private Refund refund;
