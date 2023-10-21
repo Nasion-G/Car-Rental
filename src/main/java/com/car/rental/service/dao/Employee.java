@@ -1,4 +1,5 @@
 package com.car.rental.service.dao;
+import com.car.rental.service.static_data.Role;
 import jakarta.persistence.*;
 import lombok.*;
 @Entity
@@ -16,12 +17,14 @@ public class Employee {
     private String username;
     private String name;
     private String email;
-
+    private String password;
+    private Boolean active;
 
     @ManyToOne
     @JoinColumn(name = "branch")
     private Branch branch;
 
-    private String roleId;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     }

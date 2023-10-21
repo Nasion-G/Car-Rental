@@ -1,5 +1,7 @@
 package com.sda.springsecuritydemo.security;
 
+import com.car.rental.service.dao.Employee;
+import com.car.rental.service.repositories.EmployeeRespository;
 import com.sda.springsecuritydemo.dao.UserEntity;
 import com.sda.springsecuritydemo.exceptions.GenericExceptions;
 import com.sda.springsecuritydemo.repositories.UserRepository;
@@ -12,17 +14,17 @@ import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private final UserRepository userRepository;
+    private final EmployeeRespository employeeRespository;
 
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserDetailsServiceImpl(EmployeeRespository employeeRespository) {
+        this.employeeRespository = employeeRespository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserEntity> user = userRepository.findByUsername(username);
-        if (user.isPresent()){
-            return new UserDetailsImpl(user.get());
+        Optional<Employee> employee = employeeRespository.findByUsername(username);
+        if (employee.isPresent()){
+            return new UserDetailsImpl(employee.get());
         } else {
          throw GenericExceptions.userNotFoundException("username", username);
         }
