@@ -23,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getAll() {
+    public List<Employee> findAll() {
         return null;
     }
 

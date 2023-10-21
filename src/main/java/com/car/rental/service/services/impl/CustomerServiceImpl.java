@@ -1,33 +1,42 @@
 package com.car.rental.service.services.impl;
 
 import com.car.rental.service.dao.Customer;
+import com.car.rental.service.exceptions.GenericExceptions;
+import com.car.rental.service.repositories.CustomerRepo;
 import com.car.rental.service.services.CustomerService;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CustomerServiceImpl implements CustomerService {
+    public CustomerRepo customerRepo;
+
     @Override
     public Customer create(Customer customer) {
-        return null;
+        customerRepo.save(customer);
+        return customer;
     }
 
     @Override
     public Customer update(Customer customer) {
-        return null;
+        customerRepo.save(customer);
+        return customer;
     }
 
     @Override
     public Customer findById(Long id) {
-        return null;
+        Optional<Customer> refund = customerRepo.findById(id);
+        return refund.orElseThrow(() -> GenericExceptions.notFound(id));
     }
 
     @Override
-    public List<Customer> GetAll() {
-        return null;
+    public List<Customer> findAll() {
+        return customerRepo.findAll();
     }
 
     @Override
     public String delete(Long id) {
-        return null;
+        customerRepo.deleteById(id);
+        return String.format("Customer with ID %d deleted", id);
     }
 }

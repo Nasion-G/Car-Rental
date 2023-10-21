@@ -22,7 +22,7 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
-    public List<Rental> GetAll() {
+    public List<Rental> findAll() {
         return null;
     }
 

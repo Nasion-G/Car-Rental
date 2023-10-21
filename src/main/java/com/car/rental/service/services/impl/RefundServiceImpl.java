@@ -38,7 +38,7 @@ public class RefundServiceImpl implements RefundService {
     }
 
     @Override
-    public List<Refund> getAll() {
+    public List<Refund> findAll() {
         return refundRepo.findAll();
     }
 

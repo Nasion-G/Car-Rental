@@ -27,8 +27,8 @@ public class BranchServiceImpl implements BranchService {
 
     @Override
     public Branch update(Branch branch) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        branchRepo.save(branch);
+        return branch;
     }
 
     @Override
