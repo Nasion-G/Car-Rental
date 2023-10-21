@@ -1,6 +1,4 @@
 package com.car.rental.service.dao;
-import com.car.rental.service.static_data.Role;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 @Entity
@@ -24,7 +22,6 @@ public class Employee {
     @JoinColumn(name = "branch")
     private Branch branch;
 
+    private String roleId;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
     }
