@@ -1,10 +1,9 @@
 package com.car.rental.service.dao;
 
-import com.car.rental.service.Enum.Fuel;
-import com.car.rental.service.Enum.Transmission;
+import com.car.rental.service.static_data.Fuel;
+import com.car.rental.service.static_data.Transmission;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.transaction.annotation.Transactional;
 
 @Entity
 @Data

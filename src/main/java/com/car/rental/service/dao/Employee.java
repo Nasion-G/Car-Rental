@@ -1,6 +1,4 @@
 package com.car.rental.service.dao;
-import com.car.rental.service.Enum.Role;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 @Entity
