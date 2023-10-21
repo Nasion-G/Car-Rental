@@ -5,11 +5,19 @@ import com.car.rental.service.exceptions.GenericExceptions;
 import com.car.rental.service.repositories.CustomerRepo;
 import com.car.rental.service.services.CustomerService;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
-    public CustomerRepo customerRepo;
+    public final CustomerRepo customerRepo;
 
     @Override
     public Customer create(Customer customer) {
