@@ -1,6 +1,5 @@
 package com.car.rental.service.services.impl;
 
-import com.car.rental.service.dao.Car;
 import com.car.rental.service.dao.Employee;
 import com.car.rental.service.exceptions.GenericExceptions;
 import com.car.rental.service.repositories.EmployeeRespository;
@@ -20,7 +19,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee create(Employee employee) {
-
         employeeRespository.save(employee);
         return employee;
     }
