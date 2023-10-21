@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import javax.swing.text.html.parser.Entity;
-
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final EmployeeRespository employeeRespository;
@@ -24,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Employee> user = employeeRepository.findByUsername(username);
+        Optional<Employee> user = employeeRespository.findByUsername(username);
         if (user.isPresent()) {
             return new UserDetailsImpl(user.get());
         } else {
