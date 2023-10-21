@@ -18,11 +18,15 @@ public class Employee {
     private String username;
     private String name;
     private String email;
+    private String password;
+    private Boolean active;
 
     @ManyToOne
     @JoinColumn(name = "branch")
     private Branch branch;
 
-    private String roleId;
+    @ManyToOne
+    @JoinColumn(name = "role")
+    private Role role;
 
 }
