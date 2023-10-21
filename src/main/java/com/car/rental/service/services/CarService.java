@@ -10,4 +10,13 @@ public interface CarService {
   Car findById(Long id);
   List<Car> findAll();
   String delete(Long id);
+
+    interface CustomerService {
+        void Add();
+
+        void Update();
+
+        ////////////////////////
+        void Remove();
+    }
 }
