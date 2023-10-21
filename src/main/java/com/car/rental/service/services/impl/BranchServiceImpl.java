@@ -1,7 +1,6 @@
 package com.car.rental.service.services.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,8 +32,7 @@ public class BranchServiceImpl implements BranchService {
 
     @Override
     public Branch findById(Long id) {
-        Optional<Branch> branch = branchRepo.findById(id);
-        return branch.orElseThrow(() -> GenericExceptions.notFound(id));
+        return branchRepo.findById(id).orElseThrow(() -> GenericExceptions.notFound(id));
     }
 
     @Override

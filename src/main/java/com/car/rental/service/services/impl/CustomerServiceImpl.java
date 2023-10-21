@@ -8,7 +8,6 @@ import com.car.rental.service.services.CustomerService;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,8 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer findById(Long id) {
-        Optional<Customer> refund = customerRepo.findById(id);
-        return refund.orElseThrow(() -> GenericExceptions.notFound(id));
+        return customerRepo.findById(id).orElseThrow(() -> GenericExceptions.notFound(id));
     }
 
     @Override

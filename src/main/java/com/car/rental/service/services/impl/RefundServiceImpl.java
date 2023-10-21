@@ -1,7 +1,6 @@
 package com.car.rental.service.services.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,8 +32,7 @@ public class RefundServiceImpl implements RefundService {
 
     @Override
     public Refund findById(Long id) {
-        Optional<Refund> refund = refundRepo.findById(id);
-        return refund.orElseThrow(() -> GenericExceptions.notFound(id));
+        return refundRepo.findById(id).orElseThrow(() -> GenericExceptions.notFound(id));
     }
 
     @Override

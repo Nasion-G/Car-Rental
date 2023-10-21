@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -40,7 +39,11 @@ public class EmployeeServiceImpl implements EmployeeService {
             Employee existingEmployee = this.findById(employee.getEmployeeId());
             if (existingEmployee.getUsername().equals(employee.getUsername())
                     || (employeeRepository.findByUsername(employee.getUsername()).isEmpty())) {
-                employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+                if (employee.getPassword() != null)
+                    employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+                else
+                    employee.setPassword(passwordEncoder.encode(existingEmployee.getPassword()));
+
                 employeeRepository.save(employee);
                 return employee;
             } else if (employeeRepository.findByUsername(employee.getUsername()).isPresent()) {
