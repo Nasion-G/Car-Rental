@@ -1,4 +1,4 @@
-package com.car.rental.service.entities;
+package com.car.rental.service.dao;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class Branch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long branchId;
 
-    @OneToOne(mappedBy = "employee_branch")
+    @OneToMany(mappedBy = "employee_branch")
     private List<Employee> employees;
 
     @OneToMany(mappedBy = "car_branch")
