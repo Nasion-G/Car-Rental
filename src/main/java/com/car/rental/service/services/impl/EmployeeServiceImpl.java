@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getAll() {
+    public List<Employee> findAll() {
         return employeeRespository.findAll();
     }
 
@@ -48,5 +48,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         return String.format("Employee with id %d has been removed", id);
 
     }
-
 }
