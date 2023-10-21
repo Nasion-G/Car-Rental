@@ -1,5 +1,7 @@
 package com.car.rental.service.conf;
 
+import com.car.rental.service.dao.Role;
+import com.car.rental.service.repositories.RoleRepository;
 import com.car.rental.service.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
