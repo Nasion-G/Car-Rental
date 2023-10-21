@@ -16,6 +16,8 @@ public class Branch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long branchId;
 
+    private String name;
+
     @OneToMany(mappedBy = "branch")
     private List<Employee> employees;
 
