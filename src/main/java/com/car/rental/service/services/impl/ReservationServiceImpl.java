@@ -27,8 +27,28 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Reservation update(Reservation reservation) {
-        reservationRepo.save(reservation);
-        return reservation;
+        if (reservation.getReservationId() == null) {
+            throw GenericExceptions.idIsNull();
+        } else {
+            Reservation existingReservation = this.findById(reservation.getReservationId());
+            if (reservation.getDateOfBooking() != null)
+                existingReservation.setDateOfBooking(reservation.getDateOfBooking());
+            if (reservation.getCar() != null)
+                existingReservation.setCar(reservation.getCar());
+            if (reservation.getDateFrom() != null)
+                existingReservation.setDateFrom(reservation.getDateFrom());
+            if (reservation.getDateTo() != null)
+                existingReservation.setDateTo(reservation.getDateTo());
+            if (reservation.getBranch() != null)
+                existingReservation.setBranch(reservation.getBranch());
+            if (reservation.getRefund() != null)
+                existingReservation.setRefund(reservation.getRefund());
+            if (reservation.getAmount() != null)
+                existingReservation.setAmount(reservation.getAmount());
+
+            reservationRepo.save(existingReservation);
+            return existingReservation;
+        }
     }
 
     @Override

@@ -26,8 +26,24 @@ public class RefundServiceImpl implements RefundService {
 
     @Override
     public Refund update(Refund refund) {
-        refundRepo.save(refund);
-        return refund;
+        if (refund.getRefundId() == null) {
+            throw GenericExceptions.idIsNull();
+        } else {
+            Refund existingRefund = this.findById(refund.getRefundId());
+            if (refund.getEmployee() != null)
+                existingRefund.setEmployee(refund.getEmployee());
+            if (refund.getDateOfReturn() != null)
+                existingRefund.setDateOfReturn(refund.getDateOfReturn());
+            if (refund.getRefund() != null)
+                existingRefund.setRefund(refund.getRefund());
+            if (refund.getSurcharge() != null)
+                existingRefund.setSurcharge(refund.getSurcharge());
+            if (refund.getComments() != null)
+                existingRefund.setComments(refund.getComments());
+
+            refundRepo.save(existingRefund);
+            return existingRefund;
+        }
     }
 
     @Override
