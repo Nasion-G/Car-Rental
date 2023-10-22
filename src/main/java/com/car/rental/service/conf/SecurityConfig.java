@@ -27,7 +27,7 @@ public class SecurityConfig implements CommandLineRunner, WebMvcConfigurer {
     @Value(value = "${frontendUrl}")
     private String frontendUrl;
 
-    private static final String[] allowedUrls = new String[] {"/employee/create", "/employee/all"};
+    private static final String[] allowedUrls = new String[] { "/employee/create", "/employee/all" };
 
     public SecurityConfig(UserDetailsServiceImpl userService, RoleRepository roleRepository) {
         this.userService = userService;
@@ -71,15 +71,15 @@ public class SecurityConfig implements CommandLineRunner, WebMvcConfigurer {
 
     @Override
     public void run(String... args) {
-        if (!roleRepository.existsById("ROLE_ADMIN")) {
+        if (!roleRepository.existsById("ROLE_MANAGER")) {
             Role role = Role.builder()
-                    .roleId("ROLE_ADMIN")
+                    .roleId("ROLE_MANAGER")
                     .build();
             roleRepository.save(role);
         }
-        if (!roleRepository.existsById("ROLE_USER")) {
+        if (!roleRepository.existsById("ROLE_EMPLOYEE")) {
             Role role = Role.builder()
-                    .roleId("ROLE_USER")
+                    .roleId("ROLE_EMPLOYEE")
                     .build();
             roleRepository.save(role);
         }

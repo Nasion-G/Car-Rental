@@ -1,7 +1,7 @@
 package com.car.rental.service.security;
 
 import com.car.rental.service.dao.Employee;
-import com.car.rental.service.repositories.EmployeeRespository;
+import com.car.rental.service.repositories.EmployeeRepository;
 import com.car.rental.service.exceptions.GenericExceptions;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,9 +12,9 @@ import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private final EmployeeRespository employeeRespository;
+    private final EmployeeRepository employeeRespository;
 
-    public UserDetailsServiceImpl(EmployeeRespository employeeRespository) {
+    public UserDetailsServiceImpl(EmployeeRepository employeeRespository) {
         this.employeeRespository = employeeRespository;
     }
 
