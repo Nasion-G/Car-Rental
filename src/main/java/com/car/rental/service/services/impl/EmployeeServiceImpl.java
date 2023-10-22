@@ -38,14 +38,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         } else {
             Employee existingEmployee = this.findById(employee.getEmployeeId());
             if (existingEmployee.getUsername().equals(employee.getUsername())
-                    || (employeeRepository.findByUsername(employee.getUsername()).isEmpty())) {
+                    || employeeRepository.findByUsername(employee.getUsername()).isEmpty()) {
                 if (employee.getPassword() != null)
                     employee.setPassword(passwordEncoder.encode(employee.getPassword()));
-                else
-                    employee.setPassword(passwordEncoder.encode(existingEmployee.getPassword()));
+                if (employee.getName() != null)
+                    existingEmployee.setName(employee.getName());
+                if (employee.getUsername() != null)
+                    existingEmployee.setUsername(employee.getUsername());
+                if (employee.getActive() != null)
+                    existingEmployee.setActive(employee.getActive());
+                if (employee.getRole() != null)
+                    existingEmployee.setRole(employee.getRole());
+                if (employee.getBranch() != null)
+                    existingEmployee.setBranch(employee.getBranch());
+                if (employee.getEmail() != null)
+                    existingEmployee.setEmail(employee.getEmail());
 
-                employeeRepository.save(employee);
-                return employee;
+                employeeRepository.save(existingEmployee);
+                return existingEmployee;
             } else if (employeeRepository.findByUsername(employee.getUsername()).isPresent()) {
                 throw GenericExceptions.usernameExists(employee.getUsername());
             } else {
