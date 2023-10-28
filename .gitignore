@@ -33,3 +33,5 @@ build/
 .vscode/
 
 src/resources/application.properties
+car-rental-fe/package.json
+car-rental-fe/package-lock.json
