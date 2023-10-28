@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit{
     this.customerService.login(this.name, this.email).subscribe({
       next: ()=> {
         this.createSession();
-        this.router.navigate(['/customers'])
+        this.router.navigate(['/customer'])
       },
       error: err=> {
         if (err.status === 403)
