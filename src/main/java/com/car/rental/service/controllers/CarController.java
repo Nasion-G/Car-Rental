@@ -37,4 +37,14 @@ public class CarController {
     public String deleteById(@RequestParam Long id) {
         return carService.delete(id);
     }
+
+    @GetMapping("/available")
+    public List<Car> getAvailable() {
+        return carService.getAllAvailable();
+    }
+
+    @GetMapping("/branch")
+    public List<Car> getAllByBranchFromCustomer(@RequestParam Long id) {
+        return carService.getAllByBranch(id);
+    }
 }

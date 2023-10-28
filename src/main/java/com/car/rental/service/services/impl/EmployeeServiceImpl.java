@@ -6,6 +6,7 @@ import com.car.rental.service.repositories.EmployeeRepository;
 import com.car.rental.service.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,7 +80,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     public String delete(Long id) {
         employeeRepository.deleteById(id);
         return String.format("Employee with id %d has been removed", id);
-
     }
 
+    @Override
+    public Employee getLoggedIn() {
+        return employeeRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
+                .orElseThrow(() -> GenericExceptions.userNotFoundException("Username",
+                        SecurityContextHolder.getContext().getAuthentication().getName()));
+    }
 }

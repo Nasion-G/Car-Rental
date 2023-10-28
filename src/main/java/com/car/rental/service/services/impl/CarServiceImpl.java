@@ -1,9 +1,15 @@
 package com.car.rental.service.services.impl;
 
+import com.car.rental.service.dao.Branch;
 import com.car.rental.service.dao.Car;
+import com.car.rental.service.dao.Employee;
 import com.car.rental.service.exceptions.GenericExceptions;
 import com.car.rental.service.repositories.CarRepository;
+import com.car.rental.service.services.BranchService;
 import com.car.rental.service.services.CarService;
+import com.car.rental.service.services.EmployeeService;
+import com.car.rental.service.static_data.CarStatus;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +21,8 @@ import java.util.List;
 @Transactional
 public class CarServiceImpl implements CarService {
     private final CarRepository carRepository;
+    private final EmployeeService employeeService;
+    private final BranchService branchService;
 
     @Override
     public Car create(Car car) {
@@ -67,6 +75,35 @@ public class CarServiceImpl implements CarService {
     public String delete(Long id) {
         carRepository.deleteById(id);
         return String.format("Car with id %d has been removed", id);
+    }
 
+    @Override
+    public List<Car> getAllNeedRepair() {
+        Employee employee = employeeService.getLoggedIn();
+        return carRepository.findAllByBranchAndStatus(employee.getBranch(), CarStatus.NEED_REPAIR);
+    }
+
+    @Override
+    public List<Car> getAllAvailable() {
+        Employee employee = employeeService.getLoggedIn();
+        return carRepository.findAllByBranchAndStatus(employee.getBranch(), CarStatus.AVAILABLE);
+    }
+
+    @Override
+    public List<Car> getAllBooked() {
+        Employee employee = employeeService.getLoggedIn();
+        return carRepository.findAllByBranchAndStatus(employee.getBranch(), CarStatus.BOOKED);
+    }
+
+    @Override
+    public List<Car> getAllByBranch(Long id) {
+        Employee employee = employeeService.getLoggedIn();
+        id = employee.getBranch().getBranchId();
+        return carRepository.findAllByBranch(branchService.findById(id));
+    }
+
+    public List<Car> getAllByBranchFromCustomer(Long branchId) {
+        Branch branch = branchService.findById(branchId);
+        return carRepository.findAllByBranchAndCarStatusNot(branch, CarStatus.NEED_REPAIR);
     }
 }
