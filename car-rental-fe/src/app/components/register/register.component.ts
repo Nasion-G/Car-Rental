@@ -35,24 +35,24 @@ export class RegisterComponent implements OnInit {
             name: [null],
             role: [null, Validators.required]
         });
-        // this.roleService.getAllRoles().subscribe({
-        //     next: (roles:Role[])=> {
-        //         this.roles = roles;
-        //     },
-        //     error: err => alert(err.error)
-        // })
+        this.roleService.getAllRoles().subscribe({
+            next: (roles:Role[])=> {
+                this.roles = roles;
+            },
+            error: err => alert(err.error)
+        })
     }
 
     register() {
         this.employee = this.form.value;
         console.log(this.employee);
-        // this.employeeService.create(this.employee).subscribe({
-        //     next: ()=> {
-        //         alert("User created");
-        //         this.router.navigate(['/users']);
-        //     },
-        //     error: err => alert(err.error.message)
-        // })
+        this.employeeService.create(this.employee).subscribe({
+            next: ()=> {
+                alert("User created");
+                this.router.navigate(['/employees']);
+            },
+            error: err => alert(err.error.message)
+        })
     }
 
     toggleShow() {
