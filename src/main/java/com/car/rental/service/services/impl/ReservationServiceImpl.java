@@ -6,10 +6,13 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.car.rental.service.dao.Customer;
 import com.car.rental.service.dao.Reservation;
+import com.car.rental.service.repositories.CustomerRepo;
 import com.car.rental.service.repositories.ReservationRepo;
 import com.car.rental.service.exceptions.GenericExceptions;
 import com.car.rental.service.services.ReservationService;
+import com.car.rental.service.static_data.ReservationStatus;
 
 import lombok.*;
 
@@ -17,18 +20,53 @@ import lombok.*;
 @RequiredArgsConstructor
 @Transactional
 public class ReservationServiceImpl implements ReservationService {
-    public final ReservationRepo reservationRepo;
+    private final ReservationRepo reservationRepo;
+    private final CustomerRepo customerRepo;
 
     @Override
     public Reservation create(Reservation reservation) {
-        reservationRepo.save(reservation);
-        return reservation;
+        Optional<Customer> customer = customerRepo.findByNID(reservation.getCustomer().getNID());
+        if (customer.isPresent()) {
+            reservation.setCustomer(customer.get());
+            reservation.setAmount((reservation.getDateTo().compareTo(reservation.getDateFrom()))
+                    * reservation.getCar().getPrice());
+            reservation.setStatus(ReservationStatus.PENDING);
+            reservationRepo.save(reservation);
+            return reservation;
+        } else {
+            Customer newCustomer = customerRepo.save(reservation.getCustomer());
+            reservation.setCustomer(newCustomer);
+            reservation.setAmount((reservation.getDateTo().compareTo(reservation.getDateFrom()))
+                    * reservation.getCar().getPrice());
+            reservation.setStatus(ReservationStatus.PENDING);
+            reservationRepo.save(reservation);
+            return reservation;
+        }
     }
 
     @Override
     public Reservation update(Reservation reservation) {
-        reservationRepo.save(reservation);
-        return reservation;
+        if (reservation.getReservationId() == null) {
+            throw GenericExceptions.idIsNull();
+        } else {
+            Reservation existingReservation = this.findById(reservation.getReservationId());
+            if (reservation.getDateOfBooking() != null)
+                existingReservation.setDateOfBooking(reservation.getDateOfBooking());
+            if (reservation.getCar() != null)
+                existingReservation.setCar(reservation.getCar());
+            if (reservation.getDateFrom() != null)
+                existingReservation.setDateFrom(reservation.getDateFrom());
+            if (reservation.getDateTo() != null)
+                existingReservation.setDateTo(reservation.getDateTo());
+            if (reservation.getBranch() != null)
+                existingReservation.setBranch(reservation.getBranch());
+
+            existingReservation.setAmount((existingReservation.getDateTo().compareTo(existingReservation.getDateFrom()))
+                    * existingReservation.getCar().getPrice());
+
+            reservationRepo.save(existingReservation);
+            return existingReservation;
+        }
     }
 
     @Override
@@ -48,4 +86,10 @@ public class ReservationServiceImpl implements ReservationService {
         return String.format("Reservation with ID %d deleted", id);
     }
 
+    public Reservation cancelReservation(Long id) {
+        Reservation reservation = this.findById(id);
+        reservation.setStatus(ReservationStatus.CANCELED);
+        reservationRepo.save(reservation);
+        return reservation;
+    }
 }
