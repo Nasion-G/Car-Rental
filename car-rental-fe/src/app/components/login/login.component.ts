@@ -35,4 +35,6 @@ export class LoginComponent implements OnInit{
   createSession(){
     sessionStorage.setItem('auth', 'Basic ' + window.btoa(this.username + ':' + this.password))
   }
+
+  protected name = name;
 }
