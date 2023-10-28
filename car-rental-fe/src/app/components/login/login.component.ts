@@ -9,8 +9,8 @@ import {EmployeeService} from "../../services/employee.service";
 })
 export class LoginComponent implements OnInit{
 
-  username:string;
-  password:string;
+  name:string;
+  email:string;
   constructor(private router:Router,
               private employeeService:EmployeeService) {
   }
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit{
   }
 
   onLogin(){
-    this.employeeService.login(this.username, this.password).subscribe({
+    this.employeeService.login(this.name, this.email).subscribe({
       next: ()=> {
         this.createSession();
         this.router.navigate(['/customers'])
@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit{
   }
 
   createSession(){
-    sessionStorage.setItem('auth', 'Basic ' + window.btoa(this.username + ':' + this.password))
+    sessionStorage.setItem('auth', 'Basic ' + window.btoa(this.name + ':' + this.email))
   }
 
-  protected name = name;
+  protected protectedName = name;
 }
