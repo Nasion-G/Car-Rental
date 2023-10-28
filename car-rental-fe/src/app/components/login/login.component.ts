@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {EmployeeService} from "../../services/employee.service";
+import {CustomerService} from "../../services/customer.service";
 
 @Component({
   selector: 'app-login',
@@ -12,13 +13,13 @@ export class LoginComponent implements OnInit{
   name:string;
   email:string;
   constructor(private router:Router,
-              private employeeService:EmployeeService) {
+              private customerService:CustomerService) {
   }
   ngOnInit(): void {
   }
 
   onLogin(){
-    this.employeeService.login(this.name, this.email).subscribe({
+    this.customerService.login(this.name, this.email).subscribe({
       next: ()=> {
         this.createSession();
         this.router.navigate(['/customers'])

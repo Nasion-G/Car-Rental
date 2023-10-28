@@ -15,7 +15,7 @@ export class CustomerService {
     return this.http.get(this.BASICURL+'/costumer/all');
   }
 
-  register(body:any){
+  login(body: any, email: string){
     return this.http.post(this.BASICURL+'/costumer/create',body);
 
   }
