@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit{
     this.employeeService.login(this.username, this.password).subscribe({
       next: ()=> {
         this.createSession();
-        this.router.navigate(['/employees'])
+        this.router.navigate(['/customers'])
       },
       error: err=> {
         if (err.status === 403)
