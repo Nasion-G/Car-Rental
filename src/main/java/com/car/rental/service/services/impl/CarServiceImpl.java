@@ -80,19 +80,19 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getAllNeedRepair() {
         Employee employee = employeeService.getLoggedIn();
-        return carRepository.findAllByBranchAndStatus(employee.getBranch(), CarStatus.NEED_REPAIR);
+        return carRepository.findAllByBranchAndCarStatus(employee.getBranch(), CarStatus.NEED_REPAIR);
     }
 
     @Override
     public List<Car> getAllAvailable() {
         Employee employee = employeeService.getLoggedIn();
-        return carRepository.findAllByBranchAndStatus(employee.getBranch(), CarStatus.AVAILABLE);
+        return carRepository.findAllByBranchAndCarStatus(employee.getBranch(), CarStatus.AVAILABLE);
     }
 
     @Override
     public List<Car> getAllBooked() {
         Employee employee = employeeService.getLoggedIn();
-        return carRepository.findAllByBranchAndStatus(employee.getBranch(), CarStatus.BOOKED);
+        return carRepository.findAllByBranchAndCarStatus(employee.getBranch(), CarStatus.BOOKED);
     }
 
     @Override
@@ -104,6 +104,7 @@ public class CarServiceImpl implements CarService {
 
     public List<Car> getAllByBranchFromCustomer(Long branchId) {
         Branch branch = branchService.findById(branchId);
-        return carRepository.findAllByBranchAndCarStatusNot(branch, CarStatus.NEED_REPAIR);
+        return carRepository.findAllByBranchAndCarStatusNot(branch,
+                CarStatus.NEED_REPAIR);
     }
 }

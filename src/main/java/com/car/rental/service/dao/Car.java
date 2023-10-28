@@ -2,7 +2,7 @@ package com.car.rental.service.dao;
 
 import java.util.List;
 
-import com.car.rental.service.services.CarService;
+import com.car.rental.service.static_data.CarStatus;
 import com.car.rental.service.static_data.Fuel;
 import com.car.rental.service.static_data.Transmission;
 import jakarta.persistence.*;
@@ -39,5 +39,6 @@ public class Car {
     private Fuel fuel;
     private Transmission transmission;
 
-    private CarService status;
+    @Enumerated(EnumType.STRING)
+    private CarStatus carStatus;
 }
