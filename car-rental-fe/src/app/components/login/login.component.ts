@@ -11,7 +11,7 @@ import {CustomerService} from "../../services/customer.service";
 export class LoginComponent implements OnInit{
 
   name:string;
-  email:string;
+  password:string;
   constructor(private router:Router,
               private customerService:CustomerService) {
   }
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit{
   }
 
   onLogin(){
-    this.customerService.login(this.name, this.email).subscribe({
+    this.customerService.login(this.name, this.password).subscribe({
       next: ()=> {
         this.createSession();
         this.router.navigate(['/customer'])
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit{
   }
 
   createSession(){
-    sessionStorage.setItem('auth', 'Basic ' + window.btoa(this.name + ':' + this.email))
+    sessionStorage.setItem('auth', 'Basic ' + window.btoa(this.name + ':' + this.password))
   }
 
   protected protectedName = name;
