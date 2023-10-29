@@ -1,8 +1,11 @@
 package com.car.rental.service.controllers;
 
 import com.car.rental.service.dao.Employee;
+import com.car.rental.service.security.AuthRequest;
 import com.car.rental.service.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +42,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/login")
-    public Employee login(@RequestBody Employee employee) {
-        return employeeService.create(employee);
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
+        return employeeService.login(authRequest);
     }
 }

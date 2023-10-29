@@ -3,16 +3,22 @@ package com.car.rental.service.services.impl;
 import com.car.rental.service.dao.Employee;
 import com.car.rental.service.exceptions.GenericExceptions;
 import com.car.rental.service.repositories.EmployeeRepository;
+import com.car.rental.service.security.AuthRequest;
 import com.car.rental.service.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.LockedException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +26,7 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
     @Override
     public Employee create(Employee employee) {
@@ -91,11 +98,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee login(Employee employee) {
-        Optional<Employee> optional = employeeRepository.findByUsername(employee.getUsername());
-        if (optional.get().getPassword() == employee.getPassword()) {
-            return employee;
-        } else
-            return null;
+    public ResponseEntity<?> login(AuthRequest authRequest) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.getUsername(),
+                            authRequest.getPassword()));
+            SecurityContext securityContext = SecurityContextHolder.getContext();
+            securityContext.setAuthentication(authentication);
+            return ResponseEntity.ok(authentication.isAuthenticated());
+        } catch (LockedException lockedException) {
+            return ResponseEntity.status(403).body(lockedException.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(401).body(e.getMessage());
+        }
     }
 }
