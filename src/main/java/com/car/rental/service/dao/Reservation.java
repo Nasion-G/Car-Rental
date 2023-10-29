@@ -1,6 +1,9 @@
 package com.car.rental.service.dao;
 
 import java.time.LocalDate;
+
+import com.car.rental.service.static_data.ReservationStatus;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,4 +34,11 @@ public class Reservation {
     private Refund refund;
 
     private Integer amount;
+
+    @ManyToOne
+    @JoinColumn(name = "reservations")
+    private Customer customer;
+
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status;
 }

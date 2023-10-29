@@ -1,6 +1,5 @@
 package com.car.rental.service.controllers;
 
-import com.car.rental.service.dao.Branch;
 import com.car.rental.service.dao.Car;
 import com.car.rental.service.services.CarService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CarController {
     private final CarService carService;
+
     @GetMapping("/all")
     public List<Car> getAll() {
         return carService.findAll();
@@ -36,5 +36,15 @@ public class CarController {
     @DeleteMapping("/delete")
     public String deleteById(@RequestParam Long id) {
         return carService.delete(id);
+    }
+
+    @GetMapping("/available")
+    public List<Car> getAvailable() {
+        return carService.getAllAvailable();
+    }
+
+    @GetMapping("/branch")
+    public List<Car> getAllByBranchFromCustomer(@RequestParam Long id) {
+        return carService.getAllByBranch(id);
     }
 }

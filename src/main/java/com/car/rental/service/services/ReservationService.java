@@ -14,4 +14,8 @@ public interface ReservationService {
     List<Reservation> findAll();
 
     String delete(Long id);
+
+    Reservation completeReservation(Long id);
+
+    Reservation cancelReservation(Long id, String NID);
 }

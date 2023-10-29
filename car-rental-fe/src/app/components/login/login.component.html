@@ -1,1 +1,14 @@
-<p>login works!</p>
+<div class="container text-center mt-5 col-md-5">
+    <div class="form-control">
+        <img class="mb-4" src="assets/user-png-icon.png" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="inputEmail" class="sr-only">Name</label>
+        <input type="text" id="inputEmail" class="form-control" placeholder="Name" required="required" [(ngModel)]="name">
+        <label for="email" class="sr-only">Email</label>
+        <input type="email" id="email" class="form-control mt-2" placeholder="Email" required="required" [(ngModel)]="email">
+        <button class="btn btn-lg btn-primary btn-block mt-2" type="button" (click)="onLogin()">Sign in</button>
+        <div class="text-center mt-5">
+            Don`t have an account? <a routerLink="/register">Sign Up</a> here.
+        </div>
+    </div>
+</div>

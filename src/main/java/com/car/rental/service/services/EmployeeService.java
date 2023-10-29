@@ -14,4 +14,6 @@ public interface EmployeeService {
     String delete(Long id);
 
     List<Employee> findAll();
+
+    Employee getLoggedIn();
 }

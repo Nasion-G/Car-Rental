@@ -14,4 +14,12 @@ public interface CarService {
   List<Car> findAll();
 
   String delete(Long id);
+
+  List<Car> getAllNeedRepair();
+
+  List<Car> getAllAvailable();
+
+  List<Car> getAllBooked();
+
+  List<Car> getAllByBranch(Long branchId);
 }

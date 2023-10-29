@@ -37,4 +37,14 @@ public class ReservationController {
     public String deleteById(@RequestParam Long id) {
         return reservationService.delete(id);
     }
+
+    @PutMapping("/complete")
+    public Reservation completeReservation(@RequestParam Long id) {
+        return reservationService.completeReservation(id);
+    }
+
+    @PutMapping("/cancel")
+    public Reservation cancelReservation(@RequestParam Long id, @RequestParam String NID) {
+        return reservationService.cancelReservation(id, NID);
+    }
 }
