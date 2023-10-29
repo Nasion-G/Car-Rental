@@ -7,7 +7,7 @@ import {Employee} from "../models/employee";
 })
 export class EmployeeService {
 
-  private HTTPURL = 'http://localhost:8080/user';
+  private HTTPURL = 'http://localhost:8080/employee';
 
   constructor(private http:HttpClient) { }
 

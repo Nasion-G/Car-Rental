@@ -1,6 +1,5 @@
 package com.car.rental.service.controllers;
 
-
 import com.car.rental.service.dao.Employee;
 import com.car.rental.service.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EmployeeController {
     private final EmployeeService employeeService;
+
     @GetMapping("/all")
     public List<Employee> findAll() {
         return employeeService.findAll();
@@ -36,5 +36,10 @@ public class EmployeeController {
     @DeleteMapping("/delete")
     public String deleteById(@RequestParam Long id) {
         return employeeService.delete(id);
+    }
+
+    @PostMapping("/login")
+    public Employee login(@RequestBody Employee employee) {
+        return employeeService.create(employee);
     }
 }

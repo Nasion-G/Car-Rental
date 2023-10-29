@@ -13,6 +13,8 @@ public interface EmployeeService {
 
     String delete(Long id);
 
+    Employee login(Employee employee);
+
     List<Employee> findAll();
 
     Employee getLoggedIn();

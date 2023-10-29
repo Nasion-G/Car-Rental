@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -87,5 +88,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
                 .orElseThrow(() -> GenericExceptions.userNotFoundException("Username",
                         SecurityContextHolder.getContext().getAuthentication().getName()));
+    }
+
+    @Override
+    public Employee login(Employee employee) {
+        Optional<Employee> optional = employeeRepository.findByUsername(employee.getUsername());
+        if (optional.get().getPassword() == employee.getPassword()) {
+            return employee;
+        } else
+            return null;
     }
 }

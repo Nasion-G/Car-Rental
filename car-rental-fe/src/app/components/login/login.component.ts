@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {EmployeeService} from "../../services/employee.service";
-import {CustomerService} from "../../services/customer.service";
+import { Employee } from '../../models/employee';
 
 @Component({
   selector: 'app-login',
@@ -10,19 +10,19 @@ import {CustomerService} from "../../services/customer.service";
 })
 export class LoginComponent implements OnInit{
 
-  name:string;
+  username:string;
   password:string;
   constructor(private router:Router,
-              private customerService:CustomerService) {
+              private employeeService:EmployeeService) {
   }
   ngOnInit(): void {
   }
 
   onLogin(){
-    this.customerService.login(this.name, this.password).subscribe({
+    this.employeeService.login(this.username, this.password).subscribe({
       next: ()=> {
         this.createSession();
-        this.router.navigate(['/customer'])
+        this.router.navigate(['/employee'])
       },
       error: err=> {
         if (err.status === 403)
@@ -34,8 +34,6 @@ export class LoginComponent implements OnInit{
   }
 
   createSession(){
-    sessionStorage.setItem('auth', 'Basic ' + window.btoa(this.name + ':' + this.password))
+    sessionStorage.setItem('auth', 'Basic ' + window.btoa(this.username + ':' + this.password))
   }
-
-  protected protectedName = name;
 }
