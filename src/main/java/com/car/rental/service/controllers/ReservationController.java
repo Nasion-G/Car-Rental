@@ -44,7 +44,7 @@ public class ReservationController {
     }
 
     @PutMapping("/cancel")
-    public Reservation cancelReservation(@RequestParam Long id) {
-        return reservationService.cancelReservation(id);
+    public Reservation cancelReservation(@RequestParam Long id, @RequestParam String NID) {
+        return reservationService.cancelReservation(id, NID);
     }
 }

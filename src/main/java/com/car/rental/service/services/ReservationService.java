@@ -17,5 +17,5 @@ public interface ReservationService {
 
     Reservation completeReservation(Long id);
 
-    Reservation cancelReservation(Long id);
+    Reservation cancelReservation(Long id, String NID);
 }
