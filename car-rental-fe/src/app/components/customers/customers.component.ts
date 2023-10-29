@@ -10,7 +10,11 @@ import {Employee} from "../../models/employee";
 })
 
 export class CustomersComponent implements OnInit{
+onLogin() {
+throw new Error('Method not implemented.');
+}
     customers:Customer[] ;
+    NID: string;
     constructor(private customerService:CustomerService) {
     }
     ngOnInit(): void {
