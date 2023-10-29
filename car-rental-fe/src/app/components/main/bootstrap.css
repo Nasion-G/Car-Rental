@@ -50,9 +50,6 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
-@-ms-viewport {
-  width: device-width;
-}
 
 article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
@@ -7251,7 +7248,6 @@ button.bg-dark:focus {
 }
 
 .position-sticky {
-  position: -webkit-sticky !important;
   position: sticky !important;
 }
 
@@ -7271,14 +7267,14 @@ button.bg-dark:focus {
   z-index: 1030;
 }
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sticky-top {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1020;
-  }
-}
+/*@supports ((position: -webkit-sticky) or (position: sticky)) {*/
+/*  .sticky-top {*/
+/*    position: -webkit-sticky;*/
+/*    position: sticky;*/
+/*    top: 0;*/
+/*    z-index: 1020;*/
+/*  }*/
+/*}*/
 
 .sr-only {
   position: absolute;
@@ -8867,7 +8863,6 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .text-hide {
-  font: 0/0 a;
   color: transparent;
   text-shadow: none;
   background-color: transparent;
