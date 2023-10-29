@@ -97,11 +97,14 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public Reservation cancelReservation(Long id) {
+    public Reservation cancelReservation(Long id, String NID) {
         Reservation reservation = this.findById(id);
-        reservation.setStatus(ReservationStatus.CANCELED);
-        reservationRepo.save(reservation);
-        return reservation;
+        if (reservation.getCustomer().getNID() == NID) {
+            reservation.setStatus(ReservationStatus.CANCELED);
+            reservationRepo.save(reservation);
+            return reservation;
+        } else
+            return null;
     }
 
     @Override
