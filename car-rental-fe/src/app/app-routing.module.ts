@@ -5,9 +5,10 @@ import {RegisterComponent} from "./components/register/register.component";
 import {EmployeeComponent} from "./components/employee/employee.component";
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { MainComponent } from './components/main/main.component';
 
 const routes: Routes = [
-  {path:'',component:LoginComponent},
+  {path:'',component:MainComponent},
   {path:'register',component:RegisterComponent},
   {path:'employees',component:EmployeeComponent},
 
