@@ -3,18 +3,16 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <th>Name</th>
         <th>Username</th>
-        <th>Email</th>
+        <th>Password</th>
         <th>Role</th>
 
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let employee of employees">
-        <td>{{employee.name}}</td>
         <td>{{employee.username}}</td>
-        <td>{{employee.email}}</td>
+        <td>{{employee.password}}</td>
         <td>{{employee.role.roleId}}</td>
       </tr>
 

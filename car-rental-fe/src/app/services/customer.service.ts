@@ -7,16 +7,22 @@ import {HttpClient} from "@angular/common/http";
 export class CustomerService {
 
 
-  private  BASICURL:string='http://localhost:8080';
+  private  BASICURL:string='http://localhost:8080/customer';
 
   constructor( private http : HttpClient) { }
 
   getAll(){
-    return this.http.get(this.BASICURL+'/costumer/all');
+    return this.http.get(this.BASICURL+'/all');
   }
 
-  login(body: any, email: string){
-    return this.http.post(this.BASICURL+'/costumer/create',body);
-
+  public login(NID:string){
+    let body= {
+      'NID':NID
+    }
+    return this.http.post(this.BASICURL + '/login', body);
   }
 }
+
+
+
+
