@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit{
 
   onLogin() {
     this.employeeService.login(this.username, this.password).subscribe({
-      next: (response: Employee) => {
+      next: (response: any) => {
         this.createSession();
-  
+
         if (response.role === 'ROLE_MANAGER') {
           this.router.navigate(['/manager']);
         } else {
