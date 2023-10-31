@@ -19,8 +19,7 @@ import {CustomInterceptorInterceptor} from "./services/costum-interceptor.interc
     RegisterComponent,
     CustomersComponent,
     EmployeeComponent,
-    MainComponent,
-    ManagerComponent
+    MainComponent
   ],
   imports: [
     BrowserModule,
