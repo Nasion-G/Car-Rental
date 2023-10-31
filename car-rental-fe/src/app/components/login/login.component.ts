@@ -18,17 +18,22 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  onLogin(){
+  onLogin() {
     this.employeeService.login(this.username, this.password).subscribe({
-      next: ()=> {
+      next: (response: Employee) => {
         this.createSession();
-        this.router.navigate(['/employee'])
+  
+        if (response.role === 'ROLE_MANAGER') {
+          this.router.navigate(['/manager']);
+        } else {
+          this.router.navigate(['/employee']);
+        }
       },
-      error: err=> {
+      error: err => {
         if (err.status === 403)
           alert(err.error);
         else
-          alert("Username or password invalid")
+          alert("Username or password invalid");
       }
     });
   }
