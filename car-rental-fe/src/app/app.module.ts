@@ -8,9 +8,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { MainComponent } from './components/main/main.component';
-import { ManagerComponent } from './components/manager/manager.component';
+import {CustomInterceptorInterceptor} from "./services/costum-interceptor.interceptor";
 
 @NgModule({
   declarations: [
@@ -29,7 +29,11 @@ import { ManagerComponent } from './components/manager/manager.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: CustomInterceptorInterceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
