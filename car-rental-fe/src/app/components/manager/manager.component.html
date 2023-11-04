@@ -1,1 +1,24 @@
-<p>manager works!</p>
+<div class ="container mt-5">
+    <div class="row">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Username</th>
+          <th>Role</th>
+  
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{employee.username}}</td>
+          <td>{{employee.role.roleId}}</td>
+        </tr>
+  
+        </tbody>
+  
+      </table>
+  
+    </div>
+  
+  </div>
+  

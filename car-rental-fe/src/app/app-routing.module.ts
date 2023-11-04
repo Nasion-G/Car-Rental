@@ -6,16 +6,16 @@ import {EmployeeComponent} from "./components/employee/employee.component";
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { MainComponent } from './components/main/main.component';
-import {Customer} from "./models/customer";
 import {CustomersComponent} from "./components/customers/customers.component";
+import { ManagerComponent } from './components/manager/manager.component';
 
 const routes: Routes = [
   {path:'',component:MainComponent},
   {path:'login',component:LoginComponent},
   {path:'customer',component:CustomersComponent},
-  {path:'register',component:RegisterComponent},
+  {path:'manager/register',component:RegisterComponent},
   {path:'employee',component:EmployeeComponent},
-
+  {path:'manager', component:ManagerComponent}
 ];
 
 @NgModule({
