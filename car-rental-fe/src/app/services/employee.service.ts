@@ -22,7 +22,9 @@ export class EmployeeService {
   public getAll(){
     return this.http.get(this.HTTPURL + '/all');
   }
-
+  public isManager(){
+    return this.http.get(this.HTTPURL + '/all');
+  }
   public create(employee:Employee){
     return this.http.post(this.HTTPURL + '/create', employee);
   }

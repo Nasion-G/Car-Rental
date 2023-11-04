@@ -12,11 +12,17 @@
       <tr *ngFor="let employee of employees">
         <td>{{employee.username}}</td>
         <td>{{employee.role.roleId}}</td>
+
       </tr>
+
 
       </tbody>
 
     </table>
+    <div *ngIf="isManager">
+      <button>Button 1</button>
+      <button>Button 2</button>
+    </div>
 
   </div>
 

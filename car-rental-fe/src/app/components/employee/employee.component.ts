@@ -9,6 +9,7 @@ import {Employee} from "../../models/employee";
 })
 export class EmployeeComponent implements OnInit {
    employees: Employee[] ;
+  private response: any;
   constructor(private employeeService:EmployeeService) {
 
   }
@@ -26,7 +27,26 @@ export class EmployeeComponent implements OnInit {
           console.log(err);
           alert("Something went wrong");
         }
+
       }
+
     );
+
+  }
+  isManager(){
+    return this.employeeService.isManager().subscribe(
+      {
+        next:(res:Employee[]):void=>{
+          this.employees=res;
+          if (this.response.authorities[0].authority==='ROLE_MANAGER'){
+            return
+          }
+        },
+        error:err => {
+          console.log(err);
+          alert("Something went wrong");
+        }
+      }
+    )
   }
 }
