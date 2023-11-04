@@ -22,8 +22,9 @@ export class LoginComponent implements OnInit{
     this.employeeService.login(this.username, this.password).subscribe({
       next: (response: any) => {
         this.createSession();
+        //this.router.navigate(['/employee']);
         if (response.authorities[0].authority === 'ROLE_MANAGER') {
-          this.router.navigate(['/manager']);
+          this.router.navigate(['/employee']);
         } else {
           this.router.navigate(['/employee']);
         }
