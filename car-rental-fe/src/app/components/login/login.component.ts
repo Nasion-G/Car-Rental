@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {EmployeeService} from "../../services/employee.service";
 import { Employee } from '../../models/employee';
+import { EmployeeComponent } from '../employee/employee.component';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { Employee } from '../../models/employee';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit{
-
+  employeeComponent: EmployeeComponent;
   username:string;
   password:string;
   constructor(private router:Router,
@@ -21,13 +22,14 @@ export class LoginComponent implements OnInit{
   onLogin() {
     this.employeeService.login(this.username, this.password).subscribe({
       next: (response: any) => {
-        this.createSession();
-        //this.router.navigate(['/employee']);
-        if (response.authorities[0].authority === 'ROLE_MANAGER') {
-          this.router.navigate(['/manager']);
-        } else {
-          this.router.navigate(['/employee']);
-        }
+        this.createSession(response.authorities[0].authority);
+        this.router.navigate(['/employee']);
+        // if (response.authorities[0].authority === 'ROLE_MANAGER') {
+        //   this.employeeComponent.isManager = true;
+        // } 
+        // else {
+        //   this.employeeComponent.isManager = false;
+        // }
       },
       error: err => {
         if (err.status === 403)
@@ -38,7 +40,8 @@ export class LoginComponent implements OnInit{
     });
   }
 
-  createSession(){
-    sessionStorage.setItem('auth', 'Basic ' + window.btoa(this.username + ':' + this.password))
+  createSession(role){
+    sessionStorage.setItem('auth', 'Basic ' + window.btoa(this.username + ':' + this.password));
+    sessionStorage.setItem('role', role);
   }
 }

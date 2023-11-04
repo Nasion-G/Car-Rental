@@ -15,13 +15,13 @@
       </div>
       <div class="form-group">
         <label>Email:</label>
-        <input type="text" formControlName="email"class="form-control">
+        <input type="text" formControlName="email" class="form-control">
       </div>
       <div class="form-control">
         <label>Role</label>
-        <select>
-          <option disabled>Please select role</option>
-          <option *ngFor="let role of roles" [ngValue]="role"formControlName="role">{{role.roleId}}</option>
+        <select formControlName="role">
+          <option [disabled]="disabled">Please select role</option>
+          <option *ngFor="let role of roles" onchange="setDisabled()">{{role.roleId}}</option>
         </select>
       </div>
     </form>

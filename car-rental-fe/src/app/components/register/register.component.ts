@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
     show: boolean;
     passwordClass: string = "password";
     roles: Role[];
+    disabled: boolean = false;
 
     constructor(private formBuilder: FormBuilder,
                 private employeeService: EmployeeService,
@@ -58,5 +59,9 @@ export class RegisterComponent implements OnInit {
     toggleShow() {
         this.show = !this.show
         this.passwordClass = this.show ? 'text' : 'password'
+    }
+
+    setDisabled(){
+        this.disabled = true
     }
 }
