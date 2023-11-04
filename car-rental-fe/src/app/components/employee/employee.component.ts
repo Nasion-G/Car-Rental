@@ -9,11 +9,13 @@ import {Employee} from "../../models/employee";
 })
 export class EmployeeComponent implements OnInit {
    employees: Employee[] ;
-  constructor(private employeeService:EmployeeService) {
-
-  }
-  ngOnInit(): void {
+   isManager: boolean = false;
+   user: Employee;
+   constructor(private employeeService: EmployeeService) {}
+  
+   ngOnInit(): void {
     this.getAll();
+    this.getRole();
   }
 
   getAll(){
@@ -26,7 +28,14 @@ export class EmployeeComponent implements OnInit {
           console.log(err);
           alert("Something went wrong");
         }
+
       }
+
     );
+  }
+
+  getRole(){
+    if(sessionStorage.getItem('role') == "ROLE_MANAGER")
+      this.isManager = true;
   }
 }

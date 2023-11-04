@@ -1,5 +1,12 @@
 export class Customer {
     customerId:number;
-    email:string;
-    name: string;
+
+  NID: string;
+  name:string;
+  email:string;
+  address:string;
+  celNumber:bigint;
+
+
+
 }

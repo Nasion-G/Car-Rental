@@ -3,9 +3,16 @@ package com.car.rental.service.services.impl;
 import com.car.rental.service.dao.Employee;
 import com.car.rental.service.exceptions.GenericExceptions;
 import com.car.rental.service.repositories.EmployeeRepository;
+import com.car.rental.service.security.AuthRequest;
 import com.car.rental.service.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.LockedException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +26,7 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
     @Override
     public Employee create(Employee employee) {
@@ -87,5 +95,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
                 .orElseThrow(() -> GenericExceptions.userNotFoundException("Username",
                         SecurityContextHolder.getContext().getAuthentication().getName()));
+    }
+
+    @Override
+    public ResponseEntity<?> login(AuthRequest authRequest) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.getUsername(),
+                            authRequest.getPassword()));
+            SecurityContext securityContext = SecurityContextHolder.getContext();
+            securityContext.setAuthentication(authentication);
+            return ResponseEntity.ok(authentication);
+        } catch (LockedException lockedException) {
+            return ResponseEntity.status(403).body(lockedException.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(401).body(e.getMessage());
+        }
     }
 }

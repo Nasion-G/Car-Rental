@@ -1,9 +1,11 @@
 package com.car.rental.service.controllers;
 
-
 import com.car.rental.service.dao.Employee;
+import com.car.rental.service.security.AuthRequest;
 import com.car.rental.service.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EmployeeController {
     private final EmployeeService employeeService;
+
     @GetMapping("/all")
     public List<Employee> findAll() {
         return employeeService.findAll();
@@ -36,5 +39,10 @@ public class EmployeeController {
     @DeleteMapping("/delete")
     public String deleteById(@RequestParam Long id) {
         return employeeService.delete(id);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
+        return employeeService.login(authRequest);
     }
 }
