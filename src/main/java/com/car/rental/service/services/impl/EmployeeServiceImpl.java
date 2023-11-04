@@ -105,7 +105,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                             authRequest.getPassword()));
             SecurityContext securityContext = SecurityContextHolder.getContext();
             securityContext.setAuthentication(authentication);
-            return ResponseEntity.ok(authentication.isAuthenticated());
+            return ResponseEntity.ok(authentication);
         } catch (LockedException lockedException) {
             return ResponseEntity.status(403).body(lockedException.getMessage());
         } catch (Exception e) {
