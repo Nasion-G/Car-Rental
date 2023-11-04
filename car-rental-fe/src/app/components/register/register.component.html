@@ -21,7 +21,7 @@
         <label>Role</label>
         <select formControlName="role" (change)="setDisabled()">
           <option [disabled]="disabled">Please select role</option>
-          <option *ngFor="let role of roles" >{{role.roleId}}</option>
+          <option *ngFor="let role of roles"  >{{role.roleId}}</option>
         </select>
       </div>
     </form>
