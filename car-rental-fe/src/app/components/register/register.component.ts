@@ -61,7 +61,8 @@ export class RegisterComponent implements OnInit {
         this.passwordClass = this.show ? 'text' : 'password'
     }
 
-    setDisabled(){
+    setDisabled() {
+        console.log('here')
         this.disabled = true
     }
 }
