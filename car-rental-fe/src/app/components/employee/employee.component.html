@@ -10,9 +10,8 @@
       </thead>
       <tbody>
       <tr *ngFor="let employee of employees">
-        <td>{{employee.username}}</td>
-        <td>{{employee.role.roleId}}</td>
-
+        <td>{{employee?.username}}</td>
+        <td>{{employee.role?.roleId}}</td>
       </tr>
 
 

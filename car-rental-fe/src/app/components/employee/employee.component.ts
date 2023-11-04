@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {EmployeeService} from "../../services/employee.service";
 import {Employee} from "../../models/employee";
-import { AuthService } from 'src/app/services/auth-service.service';
 
 @Component({
   selector: 'app-employees',
@@ -11,10 +10,12 @@ import { AuthService } from 'src/app/services/auth-service.service';
 export class EmployeeComponent implements OnInit {
    employees: Employee[] ;
    isManager: boolean = false;
-   constructor(private employeeService: EmployeeService, private authService: AuthService) {}
-  ngOnInit(): void {
-    this.isManager = this.authService.isManager;
+   user: Employee;
+   constructor(private employeeService: EmployeeService) {}
+  
+   ngOnInit(): void {
     this.getAll();
+    this.getRole();
   }
 
   getAll(){
@@ -27,7 +28,14 @@ export class EmployeeComponent implements OnInit {
           console.log(err);
           alert("Something went wrong");
         }
+
       }
+
     );
+  }
+
+  getRole(){
+    if(sessionStorage.getItem('role') == "ROLE_MANAGER")
+      this.isManager = true;
   }
 }

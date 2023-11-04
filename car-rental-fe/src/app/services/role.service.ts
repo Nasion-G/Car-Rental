@@ -10,6 +10,6 @@ export class RoleService {
   constructor(private http:HttpClient) { }
 
   getAllRoles(){
-    return this.http.get(this.BASEURL+'/role/all');
+    return this.http.get(this.BASEURL+'/roles/all');
   }
 }
