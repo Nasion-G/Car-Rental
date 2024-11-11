@@ -1,0 +1,1 @@
+This was the final project we had to make at the Java from Scratch course (from SDA by Protik). It contains all the neccessary things needed for a fully functional car rental website, with the main emphasis being on the back-end.
