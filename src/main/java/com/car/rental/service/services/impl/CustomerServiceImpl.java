@@ -16,52 +16,52 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
-    public final CustomerRepo customerRepo;
+  public final CustomerRepo customerRepo;
 
-    @Override
-    public Customer create(Customer customer) {
-        customerRepo.save(customer);
-        return customer;
+  @Override
+  public Customer create(Customer customer) {
+    customerRepo.save(customer);
+    return customer;
+  }
+
+  @Override
+  public Customer update(Customer customer) {
+    if (customer.getId() == null) {
+      throw GenericExceptions.idIsNull();
+    } else {
+      Customer existingCustomer = this.findById(customer.getId());
+      if (existingCustomer.getNID().equals(customer.getNID())
+          || customerRepo.findByNID(customer.getNID()).isEmpty()) {
+        if (customer.getName() != null)
+          existingCustomer.setName(customer.getName());
+        if (customer.getEmail() != null)
+          existingCustomer.setEmail(customer.getEmail());
+        if (customer.getAddress() != null)
+          existingCustomer.setAddress(customer.getAddress());
+        if (customer.getCelNumber() != null)
+          existingCustomer.setCelNumber(customer.getCelNumber());
+
+        customerRepo.save(existingCustomer);
+        return existingCustomer;
+      } else {
+        throw GenericExceptions.notFound(customer.getId());
+      }
     }
+  }
 
-    @Override
-    public Customer update(Customer customer) {
-        if (customer.getId() == null) {
-            throw GenericExceptions.idIsNull();
-        } else {
-            Customer existingCustomer = this.findById(customer.getId());
-            if (existingCustomer.getNID().equals(customer.getNID())
-                    || customerRepo.findByNID(customer.getNID()).isEmpty()) {
-                if (customer.getName() != null)
-                    existingCustomer.setName(customer.getName());
-                if (customer.getEmail() != null)
-                    existingCustomer.setEmail(customer.getEmail());
-                if (customer.getAddress() != null)
-                    existingCustomer.setAddress(customer.getAddress());
-                if (customer.getCelNumber() != null)
-                    existingCustomer.setCelNumber(customer.getCelNumber());
+  @Override
+  public Customer findById(Long id) {
+    return customerRepo.findById(id).orElseThrow(() -> GenericExceptions.notFound(id));
+  }
 
-                customerRepo.save(existingCustomer);
-                return existingCustomer;
-            } else {
-                throw GenericExceptions.notFound(customer.getId());
-            }
-        }
-    }
+  @Override
+  public List<Customer> findAll() {
+    return customerRepo.findAll();
+  }
 
-    @Override
-    public Customer findById(Long id) {
-        return customerRepo.findById(id).orElseThrow(() -> GenericExceptions.notFound(id));
-    }
-
-    @Override
-    public List<Customer> findAll() {
-        return customerRepo.findAll();
-    }
-
-    @Override
-    public String delete(Long id) {
-        customerRepo.deleteById(id);
-        return String.format("Customer with ID %d deleted", id);
-    }
+  @Override
+  public String delete(Long id) {
+    customerRepo.deleteById(id);
+    return String.format("Customer with ID %d deleted", id);
+  }
 }

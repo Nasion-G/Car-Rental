@@ -12,19 +12,19 @@ import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private final EmployeeRepository employeeRespository;
+  private final EmployeeRepository employeeRespository;
 
-    public UserDetailsServiceImpl(EmployeeRepository employeeRespository) {
-        this.employeeRespository = employeeRespository;
-    }
+  public UserDetailsServiceImpl(EmployeeRepository employeeRespository) {
+    this.employeeRespository = employeeRespository;
+  }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Employee> user = employeeRespository.findByUsername(username);
-        if (user.isPresent()) {
-            return new UserDetailsImpl(user.get());
-        } else {
-            throw GenericExceptions.userNotFoundException("username", username);
-        }
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    Optional<Employee> user = employeeRespository.findByUsername(username);
+    if (user.isPresent()) {
+      return new UserDetailsImpl(user.get());
+    } else {
+      throw GenericExceptions.userNotFoundException("username", username);
     }
+  }
 }
